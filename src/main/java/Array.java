@@ -6,6 +6,9 @@ public class Array<E > {
     private int size;
     private E[] array;
 
+    public E[] getAll(){
+        return array;
+    }
     public Array(){
         this.array = (E[]) new Object[DEFAULT_SIZE];
     }
@@ -28,7 +31,7 @@ public class Array<E > {
             ensureCapacity(this.size+1);
         }
         System.arraycopy(this.array, index, this.array, index + 1, size - index);
-        this.array[this.size]=element;
+        this.array[index]=element;
         this.size++;
     }
 
@@ -63,5 +66,36 @@ public class Array<E > {
         return (oldCapacity*3/2)+1;
     }
 
+
+    public  Array<E> quickSort(Array<E> array, Comparator<E> sort, int  start, int end){
+
+        E middleElement = array.get((start+end)/2);
+        int i = start, j = end;
+
+        while (i <= j) {
+
+            while (sort.compare(array.get(i),middleElement) < 0) {
+                i++;
+            }
+            while (sort.compare(array.get(j),middleElement) > 0) {
+                j--;
+            }
+
+            if (i <= j) {
+                E temp = array.get(i);
+                array.set(i,array.get(j));
+                array.set(j,temp);
+                i++;
+                j--;
+            }
+        }
+
+        if (start < j)
+            quickSort(array,sort, start, j);
+        if (end > i)
+            quickSort(array,sort, i, end);
+
+        return array;
+    }
 
 }
