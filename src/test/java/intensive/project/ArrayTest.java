@@ -1,3 +1,6 @@
+package intensive.project;
+
+import intensive.project.Array;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
