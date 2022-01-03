@@ -9,6 +9,7 @@ import java.util.Comparator;
 
 
 public class ArrayTest {
+
     private Array array= new Array<Integer>();
 
 
@@ -27,7 +28,9 @@ public class ArrayTest {
         //
         // Given
         //
+
         Array arrayTest= new Array<Integer>();
+
         arrayTest.add(3);
         arrayTest.add(1);
         arrayTest.add(4);
@@ -39,6 +42,7 @@ public class ArrayTest {
         //
         // When
         //
+
         arrayTest=arrayTest.quickSort(arrayTest, new Comparator<Integer>() {
             @Override
             public int compare(Integer c1, Integer c2) {
