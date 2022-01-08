@@ -1,19 +1,16 @@
-package intensive.project;
+package intensive.project.collections;
 
 
 import intensive.project.exception.ElementArrayException;
 import intensive.project.exception.SizeArrayException;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.Optional;
+import java.util.*;
 
 /**
 *@author Kirill
- * Class for implementation intensive.project.Array with used sortAlgorithm
+ * Class for implementation intensive.project.collections.Array with used sortAlgorithm
  */
-public class Array<E > {
+public class Array<E > implements List<E> {
 
     /**
      *static param for create array no parameters
@@ -57,9 +54,10 @@ public class Array<E > {
 
     /**
      * @param element - value for added array
-     *method added element in intensive.project.Array
+     *method added element in intensive.project.collections.Array
      *@throws RuntimeException if your input format is invalid
      */
+    @Override
     public void add( E element){
         Optional.ofNullable(element).orElseThrow(()-> new ElementArrayException("parameter element = NULL, element can not be null"));
 
@@ -77,10 +75,11 @@ public class Array<E > {
 
     /**
      *  @param element - value for added array
-     *  @param index  - position for added element in intensive.project.Array
+     *  @param index  - position for added element in intensive.project.collections.Array
      *  @throws RuntimeException if your input format is invalid
-     *method added element in intensive.project.Array
+     *method added element in intensive.project.collections.Array
      */
+    @Override
     public void add(E element, int index){
         Optional.ofNullable(element).orElseThrow(()-> new ElementArrayException("parameter element = NULL, element can not be null"));
 
@@ -104,8 +103,9 @@ public class Array<E > {
 
 
     /**
-     *method get length intensive.project.Array
+     *method get length intensive.project.collections.Array
      */
+    @Override
     public int getSize(){
         return this.size;
     }
@@ -116,6 +116,7 @@ public class Array<E > {
      *method returns an array element
      *@throws RuntimeException if your input format is invalid
      */
+    @Override
     public  E get(int index){
         if( index>=MIN_SIZE && index <= this.size) {
             return this.array[index];
@@ -129,16 +130,22 @@ public class Array<E > {
      * @return AllElements
      * method used for testCase
      */
+    @Override
     public E[] getAll(){
         return array;
     }
 
 
+
+
+
+
     /**
-     * @param index - position in intensive.project.Array for added element
+     * @param index - position in intensive.project.collections.Array for added element
      *@throws RuntimeException if your input format is invalid
      */
-    public void set(int index,E element){
+    @Override
+    public void set(E element, int index) {
         Optional.ofNullable(element).orElseThrow(()-> new SizeArrayException("parameter element = NULL, element can not be null"));
 
         if( index>=MIN_SIZE && index <= this.size) {
@@ -150,9 +157,10 @@ public class Array<E > {
     }
 
     /**
-     * @param index - position in intensive.project.Array for delete element
+     * @param index - position in intensive.project.collections.Array for delete element
      *@throws RuntimeException if your input format is invalid
      */
+    @Override
     public void remove(int index){
         if( index>=MIN_SIZE && index <= this.size) {
 
@@ -180,47 +188,12 @@ public class Array<E > {
     }
 
     /**
-     * method implements QuickSort for intensive.project.Array
+     * method implements QuickSort for intensive.project.collections.Array
      * @param array for sorted
      * @param sort - Compares its two arguments for order
      * @param start - value of the beginning array
      * @param end - value of the end array
      */
-    public  Array<E> quickSort(Array<E> array, Comparator<E> sort, int  start, int end){
-        Optional.ofNullable(array).orElseThrow(()-> new ElementArrayException("parameter array = NULL, array can not be null"));
-        Optional.ofNullable(sort).orElseThrow(()-> new ElementArrayException("parameter sort = NULL, sort can not be null"));
 
-        if(start>=0 && start<=this.size && end>=0 && end<=this.size){
-            E middleElement = array.get((start+end)/2);
-            int i = start, j = end;
-
-            while (i <= j) {
-
-                while (sort.compare(array.get(i),middleElement) < 0) {
-                    i++;
-                }
-                while (sort.compare(array.get(j),middleElement) > 0) {
-                    j--;
-                }
-
-                if (i <= j) {
-                    E temp = array.get(i);
-                    array.set(i,array.get(j));
-                    array.set(j,temp);
-                    i++;
-                    j--;
-                }
-            }
-
-            if (start < j)
-                quickSort(array,sort, start, j);
-            if (end > i)
-                quickSort(array,sort, i, end);
-
-            return array;
-        }else{
-            throw new SizeArrayException("parameters start and end must not exceed the size of the array ");
-        }
-    }
 
 }

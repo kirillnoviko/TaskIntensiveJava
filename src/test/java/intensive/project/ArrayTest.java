@@ -1,6 +1,8 @@
 package intensive.project;
 
-import intensive.project.Array;
+import intensive.project.collections.Array;
+import intensive.project.collections.List;
+import intensive.project.collections.algorithm.ActionForCollections;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -28,9 +30,7 @@ public class ArrayTest {
         //
         // Given
         //
-
-        Array arrayTest= new Array<Integer>();
-
+        List arrayTest= new Array<Integer>();
         arrayTest.add(3);
         arrayTest.add(1);
         arrayTest.add(4);
@@ -42,8 +42,7 @@ public class ArrayTest {
         //
         // When
         //
-
-        arrayTest=arrayTest.quickSort(arrayTest, new Comparator<Integer>() {
+        arrayTest= ActionForCollections.quickSort(arrayTest, new Comparator<Integer>() {
             @Override
             public int compare(Integer c1, Integer c2) {
                 if(c1<c2){
@@ -57,6 +56,8 @@ public class ArrayTest {
                 }
             }
         }, 0, arrayTest.getSize()-1);
+
+
 
         //
         // Then
